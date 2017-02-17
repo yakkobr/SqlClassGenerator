@@ -66,7 +66,7 @@ namespace SqlClassGenerator.Global
         /// <param name="provider">The provider</param>
         /// <param name="type">The sql data type</param>
         /// <returns>The c# type</returns>
-        private static string GetType(CustomEnums.Provider provider, string type)
+        public static string GetType(CustomEnums.Provider provider, string type)
         {
             const string defaultMappingType = "TypeMissing";
 
@@ -75,7 +75,7 @@ namespace SqlClassGenerator.Global
                 return defaultMappingType;
 
             var entry =
-                mappingList.FirstOrDefault(w => w.Provider == provider && w.SqlType.ToLower().Contains(type));
+                mappingList.FirstOrDefault(w => w.Provider == provider && w.SqlType.ToLower().Equals(type));
 
             return entry == null ? defaultMappingType : entry.CSharpType;
         }
@@ -110,7 +110,7 @@ namespace SqlClassGenerator.Global
         /// <param name="autoProperty">true if only auto properties are needed, otherwise false</param>
         /// <param name="tableModel">The list of the columns</param>
         /// <returns>The generated class</returns>
-        public static string CreateClass(CustomEnums.Provider provider, string table, bool autoProperty, List<TableModel> tableModel)
+        public static string CreateClass(CustomEnums.Provider provider, string table, bool autoProperty, List<ColumnModel> tableModel)
         {
             if (tableModel == null)
                 throw new ArgumentNullException(nameof(tableModel));
@@ -133,8 +133,7 @@ namespace SqlClassGenerator.Global
                 }
             }
 
-            return $"{result}{{";
-
+            return $"{result}}}";
         }
     }
 }

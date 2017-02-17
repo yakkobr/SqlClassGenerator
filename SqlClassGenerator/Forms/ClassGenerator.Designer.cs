@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.panelTop = new System.Windows.Forms.Panel();
-            this.btnGenerate = new System.Windows.Forms.Button();
-            this.lblTables = new System.Windows.Forms.Label();
             this.comboTables = new System.Windows.Forms.ComboBox();
+            this.lblTables = new System.Windows.Forms.Label();
+            this.btnGenerate = new System.Windows.Forms.Button();
             this.panelBottom = new System.Windows.Forms.Panel();
-            this.richTextBox = new System.Windows.Forms.RichTextBox();
-            this.btnCopy = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
+            this.btnCopy = new System.Windows.Forms.Button();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
+            this.btnColumnChooser = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.SuspendLayout();
@@ -51,26 +52,6 @@
             this.panelTop.Size = new System.Drawing.Size(598, 46);
             this.panelTop.TabIndex = 0;
             // 
-            // btnGenerate
-            // 
-            this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnGenerate.Location = new System.Drawing.Point(511, 10);
-            this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(75, 23);
-            this.btnGenerate.TabIndex = 0;
-            this.btnGenerate.Text = "Generate";
-            this.btnGenerate.UseVisualStyleBackColor = true;
-            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
-            // 
-            // lblTables
-            // 
-            this.lblTables.AutoSize = true;
-            this.lblTables.Location = new System.Drawing.Point(12, 15);
-            this.lblTables.Name = "lblTables";
-            this.lblTables.Size = new System.Drawing.Size(42, 13);
-            this.lblTables.TabIndex = 1;
-            this.lblTables.Text = "Tables:";
-            // 
             // comboTables
             // 
             this.comboTables.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -82,8 +63,29 @@
             this.comboTables.Size = new System.Drawing.Size(445, 21);
             this.comboTables.TabIndex = 2;
             // 
+            // lblTables
+            // 
+            this.lblTables.AutoSize = true;
+            this.lblTables.Location = new System.Drawing.Point(12, 15);
+            this.lblTables.Name = "lblTables";
+            this.lblTables.Size = new System.Drawing.Size(42, 13);
+            this.lblTables.TabIndex = 1;
+            this.lblTables.Text = "Tables:";
+            // 
+            // btnGenerate
+            // 
+            this.btnGenerate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGenerate.Location = new System.Drawing.Point(511, 10);
+            this.btnGenerate.Name = "btnGenerate";
+            this.btnGenerate.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerate.TabIndex = 0;
+            this.btnGenerate.Text = "Generate";
+            this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.btnGenerate_Click);
+            // 
             // panelBottom
             // 
+            this.panelBottom.Controls.Add(this.btnColumnChooser);
             this.panelBottom.Controls.Add(this.btnSettings);
             this.panelBottom.Controls.Add(this.btnCopy);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -91,6 +93,27 @@
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(598, 46);
             this.panelBottom.TabIndex = 1;
+            // 
+            // btnSettings
+            // 
+            this.btnSettings.Location = new System.Drawing.Point(12, 11);
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.Size = new System.Drawing.Size(75, 23);
+            this.btnSettings.TabIndex = 1;
+            this.btnSettings.Text = "Settings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            // 
+            // btnCopy
+            // 
+            this.btnCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopy.Enabled = false;
+            this.btnCopy.Location = new System.Drawing.Point(511, 11);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(75, 23);
+            this.btnCopy.TabIndex = 0;
+            this.btnCopy.Text = "Copy";
+            this.btnCopy.UseVisualStyleBackColor = true;
             // 
             // richTextBox
             // 
@@ -102,24 +125,17 @@
             this.richTextBox.TabIndex = 2;
             this.richTextBox.Text = "";
             // 
-            // btnCopy
+            // btnColumnChooser
             // 
-            this.btnCopy.Location = new System.Drawing.Point(93, 11);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(75, 23);
-            this.btnCopy.TabIndex = 0;
-            this.btnCopy.Text = "Copy";
-            this.btnCopy.UseVisualStyleBackColor = true;
-            // 
-            // btnSettings
-            // 
-            this.btnSettings.Location = new System.Drawing.Point(12, 11);
-            this.btnSettings.Name = "btnSettings";
-            this.btnSettings.Size = new System.Drawing.Size(75, 23);
-            this.btnSettings.TabIndex = 1;
-            this.btnSettings.Text = "Settings";
-            this.btnSettings.UseVisualStyleBackColor = true;
-            this.btnSettings.Click += new System.EventHandler(this.btnSettings_Click);
+            this.btnColumnChooser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnColumnChooser.Enabled = false;
+            this.btnColumnChooser.Location = new System.Drawing.Point(430, 11);
+            this.btnColumnChooser.Name = "btnColumnChooser";
+            this.btnColumnChooser.Size = new System.Drawing.Size(75, 23);
+            this.btnColumnChooser.TabIndex = 2;
+            this.btnColumnChooser.Text = "Columns";
+            this.btnColumnChooser.UseVisualStyleBackColor = true;
+            this.btnColumnChooser.Click += new System.EventHandler(this.btnColumnChooser_Click);
             // 
             // ClassGenerator
             // 
@@ -149,5 +165,6 @@
         private System.Windows.Forms.RichTextBox richTextBox;
         private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.Button btnSettings;
+        private System.Windows.Forms.Button btnColumnChooser;
     }
 }

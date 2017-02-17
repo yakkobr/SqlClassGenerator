@@ -56,9 +56,9 @@ namespace SqlClassGenerator.Database
         /// </summary>
         /// <param name="tableName">The name of the table</param>
         /// <returns>List of the table columns</returns>
-        public List<TableModel> GetTableInformation(string tableName)
+        public List<ColumnModel> GetTableInformation(string tableName)
         {
-            return _dbManager.Connection.Query<TableModel>($"SHOW COLUMNS FROM @tableName", new {tableName}).ToList();
+            return _dbManager.Connection.Query<ColumnModel>($"SHOW COLUMNS FROM @tableName", new {tableName}).ToList();
         }
     }
 }

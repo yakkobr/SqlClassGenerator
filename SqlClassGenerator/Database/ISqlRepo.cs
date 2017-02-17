@@ -29,6 +29,6 @@ namespace SqlClassGenerator.Database
         /// </summary>
         /// <param name="tableName">The name of the table</param>
         /// <returns>List of the table columns</returns>
-        List<TableModel> GetTableInformation(string tableName);
+        List<ColumnModel> GetTableInformation(string tableName);
     }
 }

@@ -80,7 +80,7 @@
     <Compile Include="Database\MySqlRepo.cs" />
     <Compile Include="DataObjects\ComboBoxItem.cs" />
     <Compile Include="DataObjects\MappingModel.cs" />
-    <Compile Include="DataObjects\TableModel.cs" />
+    <Compile Include="DataObjects\ColumnModel.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +92,12 @@
     </Compile>
     <Compile Include="Forms\ClassGenerator.Designer.cs">
       <DependentUpon>ClassGenerator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ColumnSelector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ColumnSelector.Designer.cs">
+      <DependentUpon>ColumnSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SourceSelection.cs">
       <SubType>Form</SubType>
@@ -112,6 +118,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\ClassGenerator.resx">
       <DependentUpon>ClassGenerator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ColumnSelector.resx">
+      <DependentUpon>ColumnSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SourceSelection.resx">
       <DependentUpon>SourceSelection.cs</DependentUpon>

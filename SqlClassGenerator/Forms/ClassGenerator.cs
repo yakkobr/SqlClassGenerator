@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SqlClassGenerator.Database;
+using SqlClassGenerator.DataObjects;
 using SqlClassGenerator.Global;
 
 namespace SqlClassGenerator.Forms
@@ -17,6 +18,7 @@ namespace SqlClassGenerator.Forms
         private CustomEnums.Provider _provider;
         private MySqlRepo _mySqlRepo;
         private MsSqlRepo _msSqlRepo;
+        private List<ColumnModel> _columnList;
 
         public ClassGenerator()
         {
@@ -36,10 +38,14 @@ namespace SqlClassGenerator.Forms
             if (string.IsNullOrEmpty(comboTables.Text))
                 return;
 
-            var tables = _provider == CustomEnums.Provider.MsSql
+            _columnList = _provider == CustomEnums.Provider.MsSql
                 ? _msSqlRepo.GetTableInformation(comboTables.Text)
                 : _mySqlRepo.GetTableInformation(comboTables.Text);
-            richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, true, tables);
+
+            if (_columnList != null)
+                btnCopy.Enabled = btnColumnChooser.Enabled = true;
+
+            richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, true, _columnList);
         }
 
         private void ClassGenerator_Shown(object sender, EventArgs e)
@@ -64,6 +70,14 @@ namespace SqlClassGenerator.Forms
         {
             var settings = new TypeMapper();
             settings.ShowDialog();
+        }
+
+        private void btnColumnChooser_Click(object sender, EventArgs e)
+        {
+            var columnChooser = new ColumnSelector(_provider, _columnList);
+            columnChooser.ShowDialog();
+
+            richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, true, columnChooser.ColumnList);
         }
     }
 }

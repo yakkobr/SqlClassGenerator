@@ -38,9 +38,9 @@
             this.txtServer = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
-            this.comboDatabase = new System.Windows.Forms.ComboBox();
-            this.btnConnectToDatabase = new System.Windows.Forms.Button();
             this.btnConnectToServer = new System.Windows.Forms.Button();
+            this.btnConnectToDatabase = new System.Windows.Forms.Button();
+            this.comboDatabase = new System.Windows.Forms.ComboBox();
             this.checkWindowsAuthentication = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -176,16 +176,18 @@
             this.txtPassword.TabIndex = 8;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
-            // comboDatabase
+            // btnConnectToServer
             // 
-            this.comboDatabase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboDatabase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboDatabase.Enabled = false;
-            this.comboDatabase.FormattingEnabled = true;
-            this.comboDatabase.Location = new System.Drawing.Point(103, 211);
-            this.comboDatabase.Name = "comboDatabase";
-            this.comboDatabase.Size = new System.Drawing.Size(194, 21);
-            this.comboDatabase.TabIndex = 9;
+            this.btnConnectToServer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnConnectToServer.Enabled = false;
+            this.btnConnectToServer.Location = new System.Drawing.Point(103, 157);
+            this.btnConnectToServer.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
+            this.btnConnectToServer.Name = "btnConnectToServer";
+            this.btnConnectToServer.Size = new System.Drawing.Size(194, 24);
+            this.btnConnectToServer.TabIndex = 11;
+            this.btnConnectToServer.Text = "Connect";
+            this.btnConnectToServer.UseVisualStyleBackColor = true;
+            this.btnConnectToServer.Click += new System.EventHandler(this.btnConnectToServer_Click);
             // 
             // btnConnectToDatabase
             // 
@@ -200,18 +202,16 @@
             this.btnConnectToDatabase.UseVisualStyleBackColor = true;
             this.btnConnectToDatabase.Click += new System.EventHandler(this.btnConnectToDatabase_Click);
             // 
-            // btnConnectToServer
+            // comboDatabase
             // 
-            this.btnConnectToServer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnConnectToServer.Enabled = false;
-            this.btnConnectToServer.Location = new System.Drawing.Point(103, 157);
-            this.btnConnectToServer.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.btnConnectToServer.Name = "btnConnectToServer";
-            this.btnConnectToServer.Size = new System.Drawing.Size(194, 24);
-            this.btnConnectToServer.TabIndex = 11;
-            this.btnConnectToServer.Text = "Connect";
-            this.btnConnectToServer.UseVisualStyleBackColor = true;
-            this.btnConnectToServer.Click += new System.EventHandler(this.btnConnectToServer_Click);
+            this.comboDatabase.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboDatabase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboDatabase.Enabled = false;
+            this.comboDatabase.FormattingEnabled = true;
+            this.comboDatabase.Location = new System.Drawing.Point(103, 211);
+            this.comboDatabase.Name = "comboDatabase";
+            this.comboDatabase.Size = new System.Drawing.Size(194, 21);
+            this.comboDatabase.TabIndex = 9;
             // 
             // checkWindowsAuthentication
             // 

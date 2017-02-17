@@ -1,6 +1,6 @@
 ﻿namespace SqlClassGenerator.DataObjects
 {
-    public class TableModel
+    public class ColumnModel
     {
         /// <summary>
         /// Gets or sets the name of the column

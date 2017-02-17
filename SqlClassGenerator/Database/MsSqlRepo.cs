@@ -53,10 +53,10 @@ namespace SqlClassGenerator.Database
         /// </summary>
         /// <param name="tableName">The name of the table</param>
         /// <returns>List of the table columns</returns>
-        public List<TableModel> GetTableInformation(string tableName)
+        public List<ColumnModel> GetTableInformation(string tableName)
         {
             return
-                _dbManager.Connection.Query<TableModel>(
+                _dbManager.Connection.Query<ColumnModel>(
                     "SELECT COLUMN_NAME AS Field, DATA_TYPE AS [Type] FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @tableName", new {tableName}).ToList();
         }
     }

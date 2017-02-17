@@ -11,48 +11,19 @@ namespace SqlClassGenerator.Forms
     public partial class SourceSelection : Form
     {
         /// <summary>
-        /// Contains the mysql db manager
-        /// </summary>
-        private MySqlRepo _mySqlManager;
-        /// <summary>
-        /// Contains the mssql db manager
-        /// </summary>
-        private MsSqlRepo _msSqlManager;
-        /// <summary>
         /// Gets the my sql connection
         /// </summary>
-        public MySqlRepo MySqlConnection => _mySqlManager;
+        public MySqlRepo MySqlConnection { get; private set; }
+
         /// <summary>
         /// Gets the mssql connection
         /// </summary>
-        public MsSqlRepo MsSqlConnection => _msSqlManager;
+        public MsSqlRepo MsSqlConnection { get; private set; }
 
         /// <summary>
         /// Gets the selected provider
         /// </summary>
         public CustomEnums.Provider Provider { get; private set; }
-        /// <summary>
-        /// Gets the server name
-        /// </summary>
-        public string Server { get; private set; }
-        /// <summary>
-        /// Gets the user
-        /// </summary>
-        public SecureString User { get; private set; }
-        /// <summary>
-        /// Gets the password
-        /// </summary>
-        public SecureString Password { get; private set; }
-        /// <summary>
-        /// Gets the windows authentication value
-        /// </summary>
-        public bool WindowsAuthentication { get; private set; }
-        /// <summary>
-        /// Gets the database
-        /// </summary>
-        public string Database { get; private set; }
-
-
 
         /// <summary>
         /// Creates a new instance of the class
@@ -96,60 +67,23 @@ namespace SqlClassGenerator.Forms
                 }
             }
 
-            Server = txtServer.Text;
-
             if (Provider == CustomEnums.Provider.MsSql)
             {
                 if (checkWindowsAuthentication.Checked)
                 {
-                    _msSqlManager = new MsSqlRepo(txtServer.Text, null, null, checkWindowsAuthentication.Checked);
-
-                    Server = txtServer.Text;
-                    WindowsAuthentication = checkWindowsAuthentication.Checked;
+                    MsSqlConnection = new MsSqlRepo(txtServer.Text, null, null, checkWindowsAuthentication.Checked);
                 }
                 else
                 {
-                    _msSqlManager = new MsSqlRepo(txtServer.Text, txtUser.Text.ToSecureString(),
+                    MsSqlConnection = new MsSqlRepo(txtServer.Text, txtUser.Text.ToSecureString(),
                         txtPassword.Text.ToSecureString(), checkWindowsAuthentication.Checked);
-                    User = txtUser.Text.ToSecureString();
-                    Password = txtPassword.Text.ToSecureString();
-                    WindowsAuthentication = checkWindowsAuthentication.Checked;
                 }
             }
             else
             {
-                _mySqlManager = new MySqlRepo(txtServer.Text, txtUser.Text.ToSecureString(),
+                MySqlConnection = new MySqlRepo(txtServer.Text, txtUser.Text.ToSecureString(),
                     txtPassword.Text.ToSecureString());
             }
-
-            GetDatabases();
-        }
-        /// <summary>
-        /// Gets the databases
-        /// </summary>
-        private void GetDatabases()
-        {
-            var databases = Provider == CustomEnums.Provider.MsSql ? _msSqlManager.GetDatabases() : _mySqlManager.GetDatabases();
-
-            comboDatabase.Items.Clear();
-            databases.OrderBy(o => o).ToList().ForEach(entry => comboDatabase.Items.Add(entry));
-
-            comboDatabase.Enabled = databases.Count > 0;
-            btnConnectToDatabase.Enabled = databases.Count > 0;
-        }
-        /// <summary>
-        /// Connects to the database
-        /// </summary>
-        private void ConnectToDatabase()
-        {
-            if (string.IsNullOrEmpty(comboDatabase.Text))
-                return;
-
-            Database = comboDatabase.Text;
-            if (Provider == CustomEnums.Provider.MsSql)
-                _msSqlManager.SetDatabase(Database);
-            else
-                _mySqlManager.SetDatabase(Database);
 
             DialogResult = DialogResult.OK;
         }
@@ -194,13 +128,6 @@ namespace SqlClassGenerator.Forms
         private void SourceSelection_Load(object sender, EventArgs e)
         {
             InitForm();
-        }
-        /// <summary>
-        /// Occurs when the user hits the connect button
-        /// </summary>
-        private void btnConnectToDatabase_Click(object sender, EventArgs e)
-        {
-            ConnectToDatabase();
         }
     }
 }

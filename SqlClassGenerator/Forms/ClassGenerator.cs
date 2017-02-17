@@ -35,6 +35,38 @@ namespace SqlClassGenerator.Forms
             InitializeComponent();
         }
         /// <summary>
+        /// Shows the databases
+        /// </summary>
+        private void ShowDatabases()
+        {
+            comboDatabase.Items.Clear();
+            var database = _provider == CustomEnums.Provider.MsSql
+                ? _msSqlRepo.GetDatabases()
+                : _mySqlRepo.GetDatabases();
+
+            database.OrderBy(o => o).ToList().ForEach(entry => comboDatabase.Items.Add(entry));
+        }
+        /// <summary>
+        /// Connects to the given database
+        /// </summary>
+        private void ConnectToDatabase()
+        {
+            if (string.IsNullOrEmpty(comboDatabase.Text))
+                return;
+
+            if (_provider == CustomEnums.Provider.MsSql)
+                _msSqlRepo.SetDatabase(comboDatabase.Text);
+            else
+                _mySqlRepo.SetDatabase(comboDatabase.Text);
+
+            comboTables.Enabled = true;
+            txtClassName.Enabled = true;
+            checkAutoProperty.Enabled = true;
+            btnGenerate.Enabled = true;
+
+            ShowTables();
+        }
+        /// <summary>
         /// Shows the tables in the combo box
         /// </summary>
         private void ShowTables()
@@ -76,7 +108,7 @@ namespace SqlClassGenerator.Forms
                 _mySqlRepo = selector.MySqlConnection;
                 _msSqlRepo = selector.MsSqlConnection;
 
-                ShowTables();
+                ShowDatabases();
             }
         }
         /// <summary>
@@ -102,7 +134,7 @@ namespace SqlClassGenerator.Forms
             var columnChooser = new ColumnSelector(_provider, _columnList);
             columnChooser.ShowDialog();
 
-            richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, checkAutoProperty.Checked, columnChooser.ColumnList);
+            richTextBox.Text = Helper.CreateClass(_provider, txtClassName.Text, checkAutoProperty.Checked, columnChooser.ColumnList);
         }
         /// <summary>
         /// Occurs when the user hits the copy button
@@ -110,6 +142,13 @@ namespace SqlClassGenerator.Forms
         private void btnCopy_Click(object sender, EventArgs e)
         {
             Clipboard.SetText(richTextBox.Text);
+        }
+        /// <summary>
+        /// Occurs when the user hits the connect button
+        /// </summary>
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            ConnectToDatabase();
         }
     }
 }

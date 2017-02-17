@@ -33,14 +33,11 @@
             this.lvlServer = new System.Windows.Forms.Label();
             this.lblUser = new System.Windows.Forms.Label();
             this.lblPassword = new System.Windows.Forms.Label();
-            this.lblDatabase = new System.Windows.Forms.Label();
             this.comboProvider = new System.Windows.Forms.ComboBox();
             this.txtServer = new System.Windows.Forms.TextBox();
             this.txtUser = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.btnConnectToServer = new System.Windows.Forms.Button();
-            this.btnConnectToDatabase = new System.Windows.Forms.Button();
-            this.comboDatabase = new System.Windows.Forms.ComboBox();
             this.checkWindowsAuthentication = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
@@ -55,19 +52,16 @@
             this.tableLayoutPanel.Controls.Add(this.lvlServer, 0, 2);
             this.tableLayoutPanel.Controls.Add(this.lblUser, 0, 3);
             this.tableLayoutPanel.Controls.Add(this.lblPassword, 0, 4);
-            this.tableLayoutPanel.Controls.Add(this.lblDatabase, 0, 8);
             this.tableLayoutPanel.Controls.Add(this.comboProvider, 1, 0);
             this.tableLayoutPanel.Controls.Add(this.txtServer, 1, 2);
             this.tableLayoutPanel.Controls.Add(this.txtUser, 1, 3);
             this.tableLayoutPanel.Controls.Add(this.txtPassword, 1, 4);
             this.tableLayoutPanel.Controls.Add(this.btnConnectToServer, 1, 6);
-            this.tableLayoutPanel.Controls.Add(this.btnConnectToDatabase, 1, 9);
-            this.tableLayoutPanel.Controls.Add(this.comboDatabase, 1, 8);
             this.tableLayoutPanel.Controls.Add(this.checkWindowsAuthentication, 1, 5);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 11;
+            this.tableLayoutPanel.RowCount = 8;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
@@ -76,10 +70,10 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(317, 275);
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(317, 190);
             this.tableLayoutPanel.TabIndex = 0;
             // 
             // lblProvider
@@ -125,17 +119,6 @@
             this.lblPassword.TabIndex = 3;
             this.lblPassword.Text = "Password:";
             this.lblPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // lblDatabase
-            // 
-            this.lblDatabase.AutoSize = true;
-            this.lblDatabase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDatabase.Location = new System.Drawing.Point(3, 208);
-            this.lblDatabase.Name = "lblDatabase";
-            this.lblDatabase.Size = new System.Drawing.Size(94, 26);
-            this.lblDatabase.TabIndex = 4;
-            this.lblDatabase.Text = "Database:";
-            this.lblDatabase.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // comboProvider
             // 
@@ -189,30 +172,6 @@
             this.btnConnectToServer.UseVisualStyleBackColor = true;
             this.btnConnectToServer.Click += new System.EventHandler(this.btnConnectToServer_Click);
             // 
-            // btnConnectToDatabase
-            // 
-            this.btnConnectToDatabase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnConnectToDatabase.Enabled = false;
-            this.btnConnectToDatabase.Location = new System.Drawing.Point(103, 235);
-            this.btnConnectToDatabase.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.btnConnectToDatabase.Name = "btnConnectToDatabase";
-            this.btnConnectToDatabase.Size = new System.Drawing.Size(194, 24);
-            this.btnConnectToDatabase.TabIndex = 10;
-            this.btnConnectToDatabase.Text = "Connect";
-            this.btnConnectToDatabase.UseVisualStyleBackColor = true;
-            this.btnConnectToDatabase.Click += new System.EventHandler(this.btnConnectToDatabase_Click);
-            // 
-            // comboDatabase
-            // 
-            this.comboDatabase.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboDatabase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboDatabase.Enabled = false;
-            this.comboDatabase.FormattingEnabled = true;
-            this.comboDatabase.Location = new System.Drawing.Point(103, 211);
-            this.comboDatabase.Name = "comboDatabase";
-            this.comboDatabase.Size = new System.Drawing.Size(194, 21);
-            this.comboDatabase.TabIndex = 9;
-            // 
             // checkWindowsAuthentication
             // 
             this.checkWindowsAuthentication.AutoSize = true;
@@ -230,7 +189,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(317, 275);
+            this.ClientSize = new System.Drawing.Size(317, 190);
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "SourceSelection";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -249,14 +208,11 @@
         private System.Windows.Forms.Label lvlServer;
         private System.Windows.Forms.Label lblUser;
         private System.Windows.Forms.Label lblPassword;
-        private System.Windows.Forms.Label lblDatabase;
         private System.Windows.Forms.ComboBox comboProvider;
         private System.Windows.Forms.TextBox txtServer;
         private System.Windows.Forms.TextBox txtUser;
         private System.Windows.Forms.TextBox txtPassword;
         private System.Windows.Forms.Button btnConnectToServer;
-        private System.Windows.Forms.Button btnConnectToDatabase;
-        private System.Windows.Forms.ComboBox comboDatabase;
         private System.Windows.Forms.CheckBox checkWindowsAuthentication;
     }
 }

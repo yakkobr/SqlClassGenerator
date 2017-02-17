@@ -57,7 +57,7 @@ namespace SqlClassGenerator.Database
         {
             return
                 _dbManager.Connection.Query<TableModel>(
-                    "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @tableName", new {tableName}).ToList();
+                    "SELECT COLUMN_NAME AS Field, DATA_TYPE AS [Type] FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @tableName", new {tableName}).ToList();
         }
     }
 }

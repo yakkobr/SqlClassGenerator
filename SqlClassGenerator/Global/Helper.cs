@@ -115,8 +115,7 @@ namespace SqlClassGenerator.Global
             if (tableModel == null)
                 throw new ArgumentNullException(nameof(tableModel));
 
-            var result = $"public class {table.Replace("_", "").FirstCharToUpper()}Class\r\n{{";
-            result += "{";
+            var result = $"public class {table.Replace("_", "").FirstCharToUpper()}Class\r\n{{\r\n";
 
             foreach (var column in tableModel)
             {
@@ -129,13 +128,12 @@ namespace SqlClassGenerator.Global
                     result += $"\tprivate {GetType(provider, column.Type)} _{column.Field.FirstCharToLower()};\r\n";
                     result += $"\tpublic {GetType(provider, column.Type)}\r\n{{" +
                               $"\t\tget {{ return _{column.Field.FirstCharToLower()}; }}\r\n" +
-                              $"\t\tset {{ _{column.Field.FirstCharToLower()} = value; }}\r\n" +
-                              "}\r\n";
+                              $"\t\tset {{ _{column.Field.FirstCharToLower()} = value; }}\r\n}}\r\n";
 
                 }
             }
 
-            return result;
+            return $"{result}{{";
 
         }
     }

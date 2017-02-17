@@ -14,7 +14,7 @@ namespace SqlClassGenerator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new TypeMapper());
+            Application.Run(new ClassGenerator());
         }
     }
 }

@@ -62,7 +62,7 @@ namespace SqlClassGenerator.Forms
             if (_columnList != null)
                 btnCopy.Enabled = btnColumnChooser.Enabled = true;
 
-            richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, checkAutoProperty.Checked, _columnList);
+            richTextBox.Text = Helper.CreateClass(_provider, txtClassName.Text, checkAutoProperty.Checked, _columnList);
         }
         /// <summary>
         /// Occurs when the form was shown
@@ -103,6 +103,13 @@ namespace SqlClassGenerator.Forms
             columnChooser.ShowDialog();
 
             richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, checkAutoProperty.Checked, columnChooser.ColumnList);
+        }
+        /// <summary>
+        /// Occurs when the user hits the copy button
+        /// </summary>
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(richTextBox.Text);
         }
     }
 }

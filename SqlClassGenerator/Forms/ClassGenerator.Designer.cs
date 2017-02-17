@@ -122,6 +122,7 @@
             this.btnCopy.TabIndex = 0;
             this.btnCopy.Text = "Copy";
             this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // richTextBox
             // 

@@ -58,7 +58,15 @@ namespace SqlClassGenerator.Database
         /// <returns>List of the table columns</returns>
         public List<ColumnModel> GetTableInformation(string tableName)
         {
-            return _dbManager.Connection.Query<ColumnModel>($"SHOW COLUMNS FROM @tableName", new {tableName}).ToList();
+            var columns = _dbManager.Connection.Query<ColumnModel>($"SHOW COLUMNS FROM {tableName}").ToList();
+
+            foreach (var column in columns)
+            {
+                if (column.Type.Contains("("))
+                    column.Type = column.Type.Substring(0, column.Type.IndexOf("("));
+            }
+
+            return columns;
         }
     }
 }

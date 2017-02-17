@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Security;
 using System.Windows.Forms;
 using SqlClassGenerator.Database;
 using SqlClassGenerator.DataObjects;

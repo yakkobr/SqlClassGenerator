@@ -106,16 +106,16 @@ namespace SqlClassGenerator.Global
         /// Generates the class
         /// </summary>
         /// <param name="provider">The provider</param>
-        /// <param name="table">The name of the table</param>
+        /// <param name="className">The name of the class</param>
         /// <param name="autoProperty">true if only auto properties are needed, otherwise false</param>
         /// <param name="tableModel">The list of the columns</param>
         /// <returns>The generated class</returns>
-        public static string CreateClass(CustomEnums.Provider provider, string table, bool autoProperty, List<ColumnModel> tableModel)
+        public static string CreateClass(CustomEnums.Provider provider, string className, bool autoProperty, List<ColumnModel> tableModel)
         {
             if (tableModel == null)
                 throw new ArgumentNullException(nameof(tableModel));
 
-            var result = $"public class {table.Replace("_", "").FirstCharToUpper()}Class\r\n{{\r\n";
+            var result = $"public class {className}\r\n{{\r\n";
 
             foreach (var column in tableModel)
             {
@@ -126,9 +126,9 @@ namespace SqlClassGenerator.Global
                 else
                 {
                     result += $"\tprivate {GetType(provider, column.Type)} _{column.Field.FirstCharToLower()};\r\n";
-                    result += $"\tpublic {GetType(provider, column.Type)}\r\n{{" +
+                    result += $"\tpublic {GetType(provider, column.Type)} {column.Field.FirstCharToUpper()}\r\n\t{{\r\n" +
                               $"\t\tget {{ return _{column.Field.FirstCharToLower()}; }}\r\n" +
-                              $"\t\tset {{ _{column.Field.FirstCharToLower()} = value; }}\r\n}}\r\n";
+                              $"\t\tset {{ _{column.Field.FirstCharToLower()} = value; }}\r\n\t}}\r\n\r\n";
 
                 }
             }

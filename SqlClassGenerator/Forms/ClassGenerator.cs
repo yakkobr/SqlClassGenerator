@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using SqlClassGenerator.Database;
 using SqlClassGenerator.DataObjects;
@@ -15,27 +10,49 @@ namespace SqlClassGenerator.Forms
 {
     public partial class ClassGenerator : Form
     {
+        /// <summary>
+        /// Contains the current provider
+        /// </summary>
         private CustomEnums.Provider _provider;
+        /// <summary>
+        /// Contains the my sql repo
+        /// </summary>
         private MySqlRepo _mySqlRepo;
+        /// <summary>
+        /// Contains the mssql repo
+        /// </summary>
         private MsSqlRepo _msSqlRepo;
+        /// <summary>
+        /// Contains the column list
+        /// </summary>
         private List<ColumnModel> _columnList;
 
+        /// <summary>
+        /// Creates a new instance of the form
+        /// </summary>
         public ClassGenerator()
         {
             InitializeComponent();
         }
-
-        private void GetTables()
+        /// <summary>
+        /// Shows the tables in the combo box
+        /// </summary>
+        private void ShowTables()
         {
             var tables = _provider == CustomEnums.Provider.MsSql ? _msSqlRepo.GetTables() : _mySqlRepo.GetTables();
 
             comboTables.Items.Clear();
             tables.OrderBy(o => o).ToList().ForEach(entry => comboTables.Items.Add(entry));
         }
-
+        /// <summary>
+        /// Generates the class
+        /// </summary>
         private void GenerateClass()
         {
             if (string.IsNullOrEmpty(comboTables.Text))
+                return;
+
+            if (string.IsNullOrEmpty(txtClassName.Text))
                 return;
 
             _columnList = _provider == CustomEnums.Provider.MsSql
@@ -45,9 +62,11 @@ namespace SqlClassGenerator.Forms
             if (_columnList != null)
                 btnCopy.Enabled = btnColumnChooser.Enabled = true;
 
-            richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, true, _columnList);
+            richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, checkAutoProperty.Checked, _columnList);
         }
-
+        /// <summary>
+        /// Occurs when the form was shown
+        /// </summary>
         private void ClassGenerator_Shown(object sender, EventArgs e)
         {
             var selector = new SourceSelection();
@@ -57,27 +76,33 @@ namespace SqlClassGenerator.Forms
                 _mySqlRepo = selector.MySqlConnection;
                 _msSqlRepo = selector.MsSqlConnection;
 
-                GetTables();
+                ShowTables();
             }
         }
-
+        /// <summary>
+        /// Occurs when the user hits the generate button
+        /// </summary>
         private void btnGenerate_Click(object sender, EventArgs e)
         {
             GenerateClass();
         }
-
+        /// <summary>
+        /// Occurs when the user hits the settings button
+        /// </summary>
         private void btnSettings_Click(object sender, EventArgs e)
         {
             var settings = new TypeMapper();
             settings.ShowDialog();
         }
-
+        /// <summary>
+        /// Occurs when the user hits the column chooser button
+        /// </summary>
         private void btnColumnChooser_Click(object sender, EventArgs e)
         {
             var columnChooser = new ColumnSelector(_provider, _columnList);
             columnChooser.ShowDialog();
 
-            richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, true, columnChooser.ColumnList);
+            richTextBox.Text = Helper.CreateClass(_provider, comboTables.Text, checkAutoProperty.Checked, columnChooser.ColumnList);
         }
     }
 }
